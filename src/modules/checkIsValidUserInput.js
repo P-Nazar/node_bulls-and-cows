@@ -9,22 +9,20 @@
  * @return {boolean} - True if the user input is valid, false otherwise
  */
 function checkIsValidUserInput(userInput) {
-  const validInput = new Set(userInput);
-  const firstValue = Array.from(validInput)[0];
-
-  if (validInput.size !== 4) {
+  // Перевірка, що це 4-значне число
+  if (userInput.length !== 4 || isNaN(+userInput)) {
     return false;
   }
 
-  if (firstValue === '0') {
+  // Перевірка, що число не починається з 0
+  if (userInput[0] === '0') {
     return false;
   }
 
-  if (isNaN(+userInput)) {
-    return false;
-  }
+  // Перевірка на дублікати за допомогою Set
+  const uniqueDigits = new Set(userInput.split(''));
 
-  return true;
+  return uniqueDigits.size === 4;
 }
 
 module.exports = {

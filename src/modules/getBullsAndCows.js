@@ -21,11 +21,23 @@ function getBullsAndCows(userInput, numberToGuess) {
     cows: 0,
   };
 
+  const checkedPositions = new Array(4).fill(false);
+
   for (let i = 0; i < 4; i++) {
     if (userInputStr[i] === numberToGuessStr[i]) {
       result.bulls++;
-    } else if (numberToGuessStr.includes(userInputStr[i])) {
-      result.cows++;
+      checkedPositions[i] = true;
+    }
+  }
+
+  for (let i = 0; i < 4; i++) {
+    if (userInputStr[i] !== numberToGuessStr[i]) {
+      const cowIndex = numberToGuessStr.indexOf(userInputStr[i]);
+
+      if (cowIndex !== -1 && !checkedPositions[cowIndex]) {
+        result.cows++;
+        checkedPositions[cowIndex] = true;
+      }
     }
   }
 

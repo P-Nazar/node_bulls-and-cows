@@ -19,7 +19,7 @@ function playRound() {
   rl.question('Введіть ваше число: ', (guess) => {
     const validInput = checkIsValidUserInput(guess);
 
-    if (!validInput) {
+    if (!checkIsValidUserInput(guess)) {
       print('невалідне значення');
       playRound();
     }
